@@ -1,5 +1,6 @@
 package com.example.sigure.booksearch;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,9 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private Handler handler = new Handler();
@@ -49,6 +53,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Log.d("JS2",src);
+
+                                /* タイトル切り抜き処理 */
+                int startNum = src.indexOf("タイトル：") + 5;
+                int endNum = src.indexOf("</li>");
+                Log.d("index(i)", startNum + "");
+                Log.d("index(i)", endNum + "");
+
+                String bookTitle = src.substring(startNum,endNum);
+                Log.d("hoge",bookTitle);
+
+                /* タイトル切り抜き処理 */
+
+                /*ファイル書き込み処理(ひな形)*/
+
+                try(FileOutputStream fileOutPutStream = openFileOutput("sample.txt", Context.MODE_PRIVATE))
+                {
+
+                }catch (IOException e)
+                {
+
+                }
+
+                /*ファイル書き込み処理(ひな形)*/
+
             }
         });
     }
